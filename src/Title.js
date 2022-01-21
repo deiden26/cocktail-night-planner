@@ -1,4 +1,5 @@
 import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
 
 export default function Title() {
   return (
@@ -7,6 +8,7 @@ export default function Title() {
       <Typography variant="subtitle1">
         Create shopping lists for your bar
       </Typography>
+      <Divider sx={{ mt: 1, mb: 2 }}/>
     </>
   );
 }
