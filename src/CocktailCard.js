@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 
 export default function CocktailCard({ name }) {
   return (
-    <Card sx={{ bgcolor: 'grey.800' }}>
+    <Card varient="outlined" elevation={2}>
       <CardContent>
         <Stack direction="row" justifyContent="space-between" alignItems="center">
           <Typography variant="h5" sx={{ color: 'text.primary' }}>
