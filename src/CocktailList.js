@@ -4,6 +4,7 @@ import CocktailCard from './CocktailCard';
 
 export default function CocktailList() {
   const cocktails = ["Martini", "High Ball"];
+  // const cocktails = [];
 
   return (
     <Stack spacing={1}>
