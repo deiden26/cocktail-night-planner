@@ -13,10 +13,10 @@ export default function PageLayout() {
         </Box>
         <Box flex={1} overflow="auto">
           <Grid container spacing={2} height="100%">
-            <Grid item xs={6}>
+            <Grid item sm={6} xs={12}>
               <Cocktails/>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item sm={6} xs={12}>
               <IngredientList/>
             </Grid>
           </Grid>
