@@ -5,7 +5,14 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-export default function CocktailCard({ name }) {
+import { useStore } from './store';
+
+export default function CocktailCard({
+  name,
+  id,
+}) {
+  const removeCocktail = useStore(state => state.removeCocktail);
+
   return (
     <Card varient="outlined" elevation={2}>
       <CardContent>
@@ -13,7 +20,11 @@ export default function CocktailCard({ name }) {
           <Typography variant="h5" sx={{ color: 'text.primary' }}>
             {name}
           </Typography>
-          <IconButton aria-label="Remove" color="error">
+          <IconButton
+            onClick={() => removeCocktail(id)}
+            aria-label="Remove"
+            color="error"
+          >
             <RemoveCircleOutlineIcon/>
           </IconButton>
         </Stack>
