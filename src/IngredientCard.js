@@ -23,11 +23,12 @@ export default function IngredientCard({ name }) {
         <CardContent>
           <Stack direction="row" justifyContent="space-between" alignItems="center">
             <Typography variant="h6" sx={{ color: 'text.secondary' }}>
-              {name}
+              {checked ? <strike>{name}</strike> : name}
             </Typography>
             <IconButton
               aria-label={checked ? 'Checked' : 'Unchecked'}
               color={checked ? 'success' : 'primary'}
+              component="div"
             >
               {checked ?
                 <CheckBoxIcon/> : <CheckBoxOutlineBlankIcon/>

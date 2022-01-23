@@ -1,3 +1,8 @@
+ import {
+   QueryClient,
+   QueryClientProvider,
+ } from 'react-query';
+
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -11,11 +16,15 @@ function App() {
     },
   });
 
+  const queryClient = new QueryClient();
+
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline/>
-      <PageLayout/>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline/>
+        <PageLayout/>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 

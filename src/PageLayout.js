@@ -11,7 +11,7 @@ export default function PageLayout() {
         <Box>
           <Title/>
         </Box>
-        <Box flex={1} overflow="auto">
+        <Box flex={1} overflow="auto" pt={1}>
           <Grid container spacing={2} height="100%">
             <Grid item sm={6} xs={12}>
               <Cocktails/>
