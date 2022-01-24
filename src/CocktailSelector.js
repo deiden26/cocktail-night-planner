@@ -1,17 +1,21 @@
-import { useState, useCallback } from 'react';
-import { useQuery } from 'react-query';
 import axios from 'axios';
+import { useQuery } from 'react-query';
+import { useState, useCallback } from 'react';
 
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { useStore } from './store';
+import { useSnackbar } from './snackbarStore';
 
 export default function CocktailSelector() {
   const addCocktail = useStore(state => state.addCocktail);
+  const hasCocktail = useStore(state => state.hasCocktail);
+
+  const snack = useSnackbar(state => state.snack);
 
   const [ searchString, setSearchString ] = useState('');
 
-  const { data: cocktails, isLoading } = useQuery(
+  const { data: cocktailOptions, isLoading } = useQuery(
     ['cocktail-search', searchString],
     async () => {
       if (searchString.length < 3) {
@@ -31,12 +35,22 @@ export default function CocktailSelector() {
   );
 
   const selectCocktail = useCallback(cocktail => {
-    // TODO: Prevent Dupes
-    if (cocktail) {
-      addCocktail(cocktail);
-      setSearchString('');
+    if (!cocktail) {
+      return;
     }
-  }, [addCocktail]);
+
+    if (hasCocktail(cocktail.id)) {
+      snack({
+        title: 'Cannot Add Cocktail',
+        message: `${cocktail.name} is already in your list`,
+        severity: 'error',
+      });
+      return;
+    }
+
+    addCocktail(cocktail);
+    setSearchString('');
+  }, [addCocktail, hasCocktail, snack]);
 
   return (
     <Autocomplete
@@ -45,11 +59,11 @@ export default function CocktailSelector() {
       value={null}
       inputValue={searchString}
       loading={isLoading}
-      options={cocktails || []}
+      options={cocktailOptions || []}
       getOptionLabel={option => option.name}
       autoHighlight={true}
       renderInput={(params) => <TextField {...params} label="Enter a Cocktail" />}
-      open={Boolean(cocktails?.length)}
+      open={Boolean(cocktailOptions?.length)}
       forcePopupIcon={false}
     />
   );

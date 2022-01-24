@@ -1,5 +1,6 @@
-import { useQueries } from 'react-query';
 import axios from 'axios';
+import shallow from 'zustand/shallow';
+import { useQueries } from 'react-query';
 
 import Paper from '@mui/material/Paper';
 
@@ -8,7 +9,7 @@ import NoIngredientsAlert from './NoIngredientsAlert';
 import { useStore } from './store';
 
 export default function IngredientList() {
-  const cocktails = useStore(state => state.cocktails);
+  const cocktails = useStore(state => state.cocktails, shallow);
   const allIngredients = new Set();
 
   const cocktailQueries = useQueries(

@@ -1,6 +1,6 @@
 import create from 'zustand';
 
-export const useStore = create(set => ({
+export const useStore = create((set, get) => ({
   cocktails: [],
   ingredients: [],
   addCocktail: cocktail => set(
@@ -13,4 +13,7 @@ export const useStore = create(set => ({
       ))
     })
   ),
+  hasCocktail: id => (
+    get().cocktails.findIndex(cocktail => cocktail.id === id) > -1
+  )
 }));
