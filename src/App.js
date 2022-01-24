@@ -7,6 +7,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
 import PageLayout from './components/PageLayout';
+import Snackbar from './components/Snackbar';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline/>
         <PageLayout/>
+        <Snackbar/>
       </ThemeProvider>
     </QueryClientProvider>
   );
