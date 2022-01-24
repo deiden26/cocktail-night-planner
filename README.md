@@ -7,7 +7,7 @@ A toy application that combines
 
 ## Demo
 
-![Demo](https://user-images.githubusercontent.com/2993523/150721077-385fda51-b93f-44e1-a633-36cc1b608e34.gif)
+![Demo](https://user-images.githubusercontent.com/2993523/150723054-d3f8b006-a179-45ad-b135-89421a7fa02d.gif)
 
 ## Available Scripts
 
