@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useLocalStorage } from 'react-use';
 
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
@@ -10,7 +11,16 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 export default function IngredientCard({ name }) {
-  const [checked, setChecked] = useState(false);
+  const [
+    checked,
+    setChecked,
+    removeChecked
+  ] = useLocalStorage(`ingredient-checked-${name}`, false);
+
+  // Remove from local storage if the ingredient is removed from the list
+  useEffect(() => {
+    return removeChecked;
+  }, [removeChecked]);
 
   return (
     <Card

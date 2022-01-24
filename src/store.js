@@ -1,19 +1,22 @@
 import create from 'zustand';
+import { persist } from 'zustand/middleware';
 
-export const useStore = create((set, get) => ({
-  cocktails: [],
-  ingredients: [],
-  addCocktail: cocktail => set(
-    state => ({cocktails: [...state.cocktails, cocktail]})
-  ),
-  removeCocktail: id => set(
-    state => ({
-      cocktails: state.cocktails.filter(listCocktail => (
-        listCocktail.id !== id
-      ))
-    })
-  ),
-  hasCocktail: id => (
-    get().cocktails.findIndex(cocktail => cocktail.id === id) > -1
-  )
-}));
+export const useStore = create(persist(
+  (set, get) => ({
+    cocktails: [],
+    addCocktail: cocktail => set(
+      state => ({cocktails: [...state.cocktails, cocktail]})
+    ),
+    removeCocktail: id => set(
+      state => ({
+        cocktails: state.cocktails.filter(cocktail => (
+          cocktail.id !== id
+        ))
+      })
+    ),
+    hasCocktail: id => (
+      get().cocktails.findIndex(cocktail => cocktail.id === id) > -1
+    ),
+  })),
+  { name: 'cocktails' }
+);
