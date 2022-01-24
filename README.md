@@ -1,6 +1,9 @@
 # Cocktail Night Planner
 
-Create shopping lists for your bar.
+A toy application that combines
+- [zustand](https://github.com/pmndrs/zustand) client state management
+- [react-query](https://github.com/tannerlinsley/react-query) server state management
+- [material-ui](https://github.com/mui-org/material-ui) components
 
 ## Demo
 
