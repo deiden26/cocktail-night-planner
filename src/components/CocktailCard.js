@@ -5,13 +5,13 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-import { useStore } from './store';
+import { useCocktails } from '../stores/cocktailStore';
 
 export default function CocktailCard({
   name,
   id,
 }) {
-  const removeCocktail = useStore(state => state.removeCocktail);
+  const removeCocktail = useCocktails(state => state.removeCocktail);
 
   return (
     <Card varient="outlined" elevation={2}>

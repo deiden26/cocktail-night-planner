@@ -6,10 +6,11 @@ import Paper from '@mui/material/Paper';
 
 import IngredientCard from './IngredientCard';
 import NoIngredientsAlert from './NoIngredientsAlert';
-import { useStore } from './store';
+
+import { useCocktails } from '../stores/cocktailStore';
 
 export default function IngredientList() {
-  const cocktails = useStore(state => state.cocktails, shallow);
+  const cocktails = useCocktails(state => state.cocktails, shallow);
   const allIngredients = new Set();
 
   const cocktailQueries = useQueries(

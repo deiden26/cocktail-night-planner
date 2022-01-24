@@ -1,7 +1,7 @@
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
-export const useStore = create(persist(
+export const useCocktails = create(persist(
   (set, get) => ({
     cocktails: [],
     addCocktail: cocktail => set(

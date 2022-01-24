@@ -4,12 +4,13 @@ import { useState, useCallback } from 'react';
 
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { useStore } from './store';
-import { useSnackbar } from './snackbarStore';
+
+import { useCocktails } from '../stores/cocktailStore';
+import { useSnackbar } from '../stores/snackbarStore';
 
 export default function CocktailSelector() {
-  const addCocktail = useStore(state => state.addCocktail);
-  const hasCocktail = useStore(state => state.hasCocktail);
+  const addCocktail = useCocktails(state => state.addCocktail);
+  const hasCocktail = useCocktails(state => state.hasCocktail);
 
   const snack = useSnackbar(state => state.snack);
 

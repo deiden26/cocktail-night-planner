@@ -9,7 +9,8 @@ import AlertTitle from '@mui/material/AlertTitle';
 import Title from './Title';
 import Cocktails from './Cocktails';
 import IngredientList from './IngredientList';
-import { useSnackbar } from './snackbarStore';
+
+import { useSnackbar } from '../stores/snackbarStore';
 
 export default function PageLayout() {
   const [

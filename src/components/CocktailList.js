@@ -3,10 +3,11 @@ import shallow from 'zustand/shallow';
 import Stack from '@mui/material/Stack';
 
 import CocktailCard from './CocktailCard';
-import { useStore } from './store';
+
+import { useCocktails } from '../stores/cocktailStore';
 
 export default function CocktailList() {
-  const cocktails = useStore(state => state.cocktails, shallow);
+  const cocktails = useCocktails(state => state.cocktails, shallow);
 
   return (
     <Stack spacing={1}>
