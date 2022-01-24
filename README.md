@@ -4,6 +4,7 @@ Create shopping lists for your bar.
 
 ## Demo
 
+![Demo](https://user-images.githubusercontent.com/2993523/150721077-385fda51-b93f-44e1-a633-36cc1b608e34.gif)
 
 ## Available Scripts
 
