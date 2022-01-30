@@ -25,15 +25,7 @@ export function useSearchCocktails(searchString) {
 export function useGetCocktail(id) {
   return useQuery(
     ['get-cocktail', id],
-    async () => {
-      const response = await axios.get(
-        'https://www.thecocktaildb.com/api/json/v1/1/lookup.php',
-        { params: { i: id } }
-      );
-      const drink = response.data.drinks[0];
-
-      return parseDrink(drink);
-    }
+    getCocktail(id)
   );
 }
 
@@ -41,19 +33,20 @@ export function useGetCocktails(ids) {
   return useQueries(
     ids.map(id => ({
       queryKey: ['get-cocktail', id],
-      queryFn: async () => {
-        const response = await axios.get(
-          'https://www.thecocktaildb.com/api/json/v1/1/lookup.php',
-          { params: { i: id } }
-        );
-        const drink = response.data.drinks[0];
-
-        return parseDrink(drink);
-      }
+      queryFn: getCocktail(id),
     }))
   );
 }
 
+const getCocktail = (id) => async () => {
+  const response = await axios.get(
+    'https://www.thecocktaildb.com/api/json/v1/1/lookup.php',
+    { params: { i: id } }
+  );
+  const drink = response.data.drinks[0];
+
+  return parseDrink(drink);
+};
 
 function parseDrink(drink) {
   const ingredients = [];
