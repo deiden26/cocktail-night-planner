@@ -3,19 +3,19 @@ import { persist } from 'zustand/middleware';
 
 export const useCocktails = create(persist(
   (set, get) => ({
-    cocktails: [],
-    addCocktail: cocktail => set(
-      state => ({cocktails: [...state.cocktails, cocktail]})
+    cocktailIds: [],
+    addCocktail: id => set(
+      state => ({cocktailIds: [...state.cocktailIds, id]})
     ),
     removeCocktail: id => set(
       state => ({
-        cocktails: state.cocktails.filter(cocktail => (
-          cocktail.id !== id
+        cocktailIds: state.cocktailIds.filter(cocktailId => (
+          cocktailId !== id
         ))
       })
     ),
     hasCocktail: id => (
-      get().cocktails.findIndex(cocktail => cocktail.id === id) > -1
+      get().cocktailIds.findIndex(cocktailId => cocktailId === id) > -1
     ),
   })),
   { name: 'cocktails' }

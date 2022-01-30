@@ -1,44 +1,25 @@
-import axios from 'axios';
 import shallow from 'zustand/shallow';
-import { useQueries } from 'react-query';
 
 import Paper from '@mui/material/Paper';
 
 import IngredientCard from './IngredientCard';
 import NoIngredientsAlert from './NoIngredientsAlert';
 
+import { useGetCocktails } from '../api';
 import { useCocktails } from '../stores/cocktailStore';
 
 export default function IngredientList() {
-  const cocktails = useCocktails(state => state.cocktails, shallow);
+  const cocktailIds = useCocktails(state => state.cocktailIds, shallow);
   const allIngredients = new Set();
 
-  const cocktailQueries = useQueries(
-    cocktails.map(cocktail => ({
-      queryKey: ['cocktail-ingredients', cocktail.id],
-      queryFn: async () => {
-        const response = await axios.get(
-          'https://www.thecocktaildb.com/api/json/v1/1/lookup.php',
-          { params: { i: cocktail.id } }
-        );
-        const drink = response.data.drinks[0];
+  const cocktailQueries = useGetCocktails(cocktailIds);
 
-        const ingredients = [];
-        for (let i = 1; i <= 15; i++) {
-          const ingredient = drink[`strIngredient${i}`];
-          if (ingredient) {
-            ingredients.push(ingredient);
-          }
-        }
-        return ingredients;
-      }
-    }))
-  );
-
-  cocktailQueries.forEach(({ data: ingredients }) => {
-    ingredients?.forEach(ingredient => allIngredients.add(ingredient));
+  cocktailQueries.forEach(({ data: cocktail, isLoading }) => {
+    if (isLoading) {
+      return;
+    }
+    cocktail.ingredients.forEach(ingredient => allIngredients.add(ingredient));
   });
-
 
   return (
     <>

@@ -7,15 +7,14 @@ import CocktailCard from './CocktailCard';
 import { useCocktails } from '../stores/cocktailStore';
 
 export default function CocktailList() {
-  const cocktails = useCocktails(state => state.cocktails, shallow);
+  const cocktailIds = useCocktails(state => state.cocktailIds, shallow);
 
   return (
     <Stack spacing={1}>
-      {cocktails.map(cocktail => (
+      {cocktailIds.map(cocktailId => (
         <CocktailCard
-          key={cocktail.id}
-          id={cocktail.id}
-          name={cocktail.name}
+          key={cocktailId}
+          id={cocktailId}
         />
       ))}
     </Stack>

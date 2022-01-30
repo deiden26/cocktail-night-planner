@@ -1,10 +1,9 @@
-import axios from 'axios';
-import { useQuery } from 'react-query';
 import { useState, useCallback } from 'react';
 
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
+import { useSearchCocktails } from '../api';
 import { useCocktails } from '../stores/cocktailStore';
 import { useSnackbar } from '../stores/snackbarStore';
 
@@ -16,24 +15,7 @@ export default function CocktailSelector() {
 
   const [ searchString, setSearchString ] = useState('');
 
-  const { data: cocktailOptions, isLoading } = useQuery(
-    ['cocktail-search', searchString],
-    async () => {
-      if (searchString.length < 3) {
-        return [];
-      }
-
-      const response = await axios.get(
-        'https://www.thecocktaildb.com/api/json/v1/1/search.php',
-        { params: { s: searchString } }
-      );
-
-      return (response.data.drinks || []).map(drink => ({
-        name: drink.strDrink,
-        id: drink.idDrink
-      }));
-    }
-  );
+  const { data: cocktailOptions, isLoading } = useSearchCocktails(searchString);
 
   const selectCocktail = useCallback(cocktail => {
     if (!cocktail) {
@@ -49,7 +31,7 @@ export default function CocktailSelector() {
       return;
     }
 
-    addCocktail(cocktail);
+    addCocktail(cocktail.id);
     setSearchString('');
   }, [addCocktail, hasCocktail, snack]);
 
